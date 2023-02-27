@@ -7,8 +7,8 @@ function PasswordGenerator() {
   const [password, setPassword] = useState('');
   const [length, setLength] = useState(8);
   const [includeUppercase, setIncludeUppercase] = useState(false);
-  const [includeLowercase, setIncludeLowercase] = useState(false);
-  const [includeNumbers, setIncludeNumbers] = useState(false);
+  const [includeLowercase, setIncludeLowercase] = useState(true);
+  const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSpecialChars, setIncludeSpecialChars] = useState(false);
 
   function generatePassword(length, includeUppercase, includeLowercase, includeNumbers, includeSpecialChars) {
