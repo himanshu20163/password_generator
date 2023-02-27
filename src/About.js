@@ -3,54 +3,58 @@ import './about.css';
 import React, { useState } from 'react';
 import copy from "copy-to-clipboard";
 
-function PasswordGenerator() {
-  const [password, setPassword] = useState('');
-  const [length, setLength] = useState(8);
+const PasswordGenerator = () => {
+  const [passwordLength, setPasswordLength] = useState(8);
   const [includeUppercase, setIncludeUppercase] = useState(false);
   const [includeLowercase, setIncludeLowercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSpecialChars, setIncludeSpecialChars] = useState(false);
+  const [generatedPassword, setGeneratedPassword] = useState('');
 
-  function generatePassword(length, includeUppercase, includeLowercase, includeNumbers, includeSpecialChars) {
+  const generatePassword = () => {
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const numberChars = '0123456789';
     const specialChars = '!@#$%^&*()_+~`|}{[]\:;?><,./-=';
-    let chars = '';
-    if (includeUppercase) {
-      chars += uppercaseChars;
-    }
-    if (includeLowercase) {
-      chars += lowercaseChars;
-    }
-    if (includeNumbers) {
-      chars += numberChars;
-    }
-    if (includeSpecialChars) {
-      chars += specialChars;
-    }
-    let password = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * chars.length);
-      password += chars[randomIndex];
-    }
-    return password;
-  }
 
-  function handleGeneratePassword() {
-    setPassword(generatePassword(length, includeUppercase, includeLowercase, includeNumbers, includeSpecialChars));
-  }
+    let availableChars = '';
+
+    if (includeUppercase) {
+      availableChars += uppercaseChars;
+    }
+
+    if (includeLowercase) {
+      availableChars += lowercaseChars;
+    }
+
+    if (includeNumbers) {
+      availableChars += numberChars;
+    }
+
+    if (includeSpecialChars) {
+      availableChars += specialChars;
+    }
+
+    let generatedPassword = '';
+
+    for (let i = 0; i < passwordLength; i++) {
+      const randomIndex = Math.floor(Math.random() * availableChars.length);
+      generatedPassword += availableChars[randomIndex];
+    }
+
+    setGeneratedPassword(generatedPassword);
+  };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(password);
-    alert(`You have copied "${password}"`);
+    navigator.clipboard.writeText(generatePassword);
+    alert(`You have copied "${generatePassword}"`);
  }
   return (
     <div className="password-generator">
     <h1>Password Generator</h1>
     <div className="form">
     <div className="result">
-      <input className="result-input" type="text" value={password} readOnly />
+      <input className="result-input" type="text" value={generatePassword} readOnly />
       <i class="fa fa-clone" aria-hidden="true" onClick={copyToClipboard}></i>
     </div>
       <div className="form-group1">
@@ -77,7 +81,7 @@ function PasswordGenerator() {
         <input type="checkbox" checked={includeSpecialChars} onChange={(e) => setIncludeSpecialChars(e.target.checked)} />
         <label>Include Special Characters:</label>
       </div>
-      <button className="generate-btn" onClick={handleGeneratePassword}>Generate Password</button>
+      <button className="generate-btn" onClick={generatePassword}>Generate Password</button>
       
     </div>
     
