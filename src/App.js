@@ -1,25 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import './about.css';
+import PasswordGenerator from './About';
+import Cards from './Component/Profilecards'
+import { useState } from 'react';
+import TestimonialSlider from './img/Slider';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{display:"flex",flexWrap:"wrap",padding:"10px"}}>
+      <PasswordGenerator />
+      <TestimonialSlider />
     </div>
   );
 }
 
 export default App;
+
